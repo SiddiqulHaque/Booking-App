@@ -12,7 +12,7 @@ exports.createHotel = async (req, res, next) => {
 exports.updateHotel = async (req, res, next) => {
   try {
     const updatedHotel = await Hotel.findByIdAndUpdate(
-      id,
+      req.params.id,
       { $set: req.body },
       { new: true }
     );
@@ -30,8 +30,12 @@ exports.getoneHotel = async (req, res, next) => {
   }
 };
 exports.getallHotel = async (req, res, next) => {
+  const { min, max, ...others } = req.query;
   try {
-    const hotels = await Hotel.find();
+    const hotels = await Hotel.find({
+      ...others,
+      cheapestPrice: { $gt: min | 1, $lt: max || 99999999 },
+    }).limit(req.query.limit);
     res.status(200).json(hotels);
   } catch (err) {
     next(err);
@@ -58,11 +62,10 @@ exports.countbyType = async (req, res, next) => {
     const villaCount = await Hotel.countDocuments({ type: "villa" });
 
     res.status(200).json([
-      { type: "hotel", count: "hotelCount" },
-      { type: "apartment", count: "apartmentCount" },
-      { type: "villa", count: "villaCount" },
-      { type: "resort", count: "resortCount" },
-     
+      { type: "hotel", count: hotelCount },
+      { type: "apartment", count: apartmentCount },
+      { type: "villa", count: villaCount },
+      { type: "resort", count: resortCount },
     ]);
   } catch (err) {
     next(err);

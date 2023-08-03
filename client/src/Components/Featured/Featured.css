@@ -9,6 +9,7 @@
     width: 100%;
     object-fit: cover;
 }
+ 
 .featured-item{
     overflow: hidden;
     border-radius: 8px;

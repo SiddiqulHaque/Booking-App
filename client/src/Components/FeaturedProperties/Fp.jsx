@@ -1,64 +1,41 @@
 import React from "react";
 import "./Fp.css";
+import useFetch from "../../Hooks/useFetch";
 const Fp = () => {
+  const { data, loading, error } = useFetch("/hotels?featured=true");
+  console.log(data);
   return (
     <div className="fp-container">
-      <div className="fp-item">
-        <img
-          src="https://cf.bstatic.com/xdata/images/hotel/square600/87428762.webp?k=de5db8fe94cbfe08d3bf16d3c86def035fd73b43ee497cffe27b03363764e0e2&o="
-          alt=""
-          className="fp-img"
-        />
-        <span className="fp-name">7Seasons Apartments Budapest</span>
-        <span className="fp-city">06. Terézváros, Hungary, Budapest</span>
-        <span className="fp-price">Starting from ₹ 11,188</span>
-        <div className="fp-rating">
-          <button>8.9</button>
-          <span>Excellent</span>
-        </div>
-      </div>
-      <div className="fp-item">
-        <img
-          src="https://cf.bstatic.com/xdata/images/hotel/square600/87428762.webp?k=de5db8fe94cbfe08d3bf16d3c86def035fd73b43ee497cffe27b03363764e0e2&o="
-          alt=""
-          className="fp-img"
-        />
-        <span className="fp-name">7Seasons Apartments Budapest</span>
-        <span className="fp-city">06. Terézváros, Hungary, Budapest</span>
-        <span className="fp-price">Starting from ₹ 11,188</span>
-        <div className="fp-rating">
-          <button>8.9</button>
-          <span>Excellent</span>
-        </div>
-      </div>
-      <div className="fp-item">
-        <img
-          src="https://cf.bstatic.com/xdata/images/hotel/square600/87428762.webp?k=de5db8fe94cbfe08d3bf16d3c86def035fd73b43ee497cffe27b03363764e0e2&o="
-          alt=""
-          className="fp-img"
-        />
-        <span className="fp-name">7Seasons Apartments Budapest</span>
-        <span className="fp-city">06. Terézváros, Hungary, Budapest</span>
-        <span className="fp-price">Starting from ₹ 11,188</span>
-        <div className="fp-rating">
-          <button>8.9</button>
-          <span>Excellent</span>
-        </div>
-      </div>
-      <div className="fp-item">
-        <img
-          src="https://cf.bstatic.com/xdata/images/hotel/square600/87428762.webp?k=de5db8fe94cbfe08d3bf16d3c86def035fd73b43ee497cffe27b03363764e0e2&o="
-          alt=""
-          className="fp-img"
-        />
-        <span className="fp-name">7Seasons Apartments Budapest</span>
-        <span className="fp-city">06. Terézváros, Hungary, Budapest</span>
-        <span className="fp-price">Starting from ₹ 11,188</span>
-        <div className="fp-rating">
-          <button>8.9</button>
-          <span>Excellent</span>
-        </div>
-      </div>
+      {loading ? (
+        "Loading "
+      ) : (
+        <>
+          {data.map((item) => (
+            <div className="fp-item" key={item._id}>
+              <img
+                src={
+                  item.photos.length===0
+                    ? "https://r-xx.bstatic.com/xdata/images/xphoto/263x210/57584488.jpeg?k=d8d4706fc72ee789d870eb6b05c0e546fd4ad85d72a3af3e30fb80ca72f0ba57&o="
+                    : item.photos[0]
+                }
+                alt=""
+                className="fp-img"
+              />
+              <span className="fp-name">{item.name}</span>
+              <span className="fp-city">{item.city}</span>
+              <span className="fp-price">
+                Starting from ${item.cheapestPrice}
+              </span>
+              {item.rating && (
+                <div className="fp-rating">
+                  <button>{item.rating}</button>
+                  <span>Excellent</span>
+                </div>
+              )}
+            </div>
+          ))}
+        </>
+      )}
     </div>
   );
 };

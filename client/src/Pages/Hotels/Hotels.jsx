@@ -8,13 +8,22 @@ import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 import { format } from "date-fns";
 import Hotelresult from "../../Components/Hotelresult/Hotelresult";
+import useFetch from "../../Hooks/useFetch";
 const Hotels = () => {
   const location = useLocation();
   console.log(location);
   const [destination, setDestination] = useState(location.state.destination);
-  const [date, setDate] = useState(location.state.date);
+  const [dates, setDates] = useState(location.state.dates);
   const [options, setOptions] = useState(location.state.options);
-  const [opendate,setOpendate]=useState(false);
+  const [opendate, setOpendate] = useState(false);
+  const [min, setMin] = useState(undefined);
+  const [max, setMax] = useState(undefined);
+  const { data, loading, error, reFetch } = useFetch(
+    `/hotels?city=${destination}&min=${min || 0}&max=${max || 9999999}`
+  );
+  const handleClick = () => {
+    reFetch();
+  };
   return (
     <>
       <Navbar />
@@ -29,55 +38,81 @@ const Hotels = () => {
             </div>
             <div className="hsearch-item">
               <label htmlFor="">Check-in-date</label>
-              <span onClick={()=>setOpendate(!opendate)}>{`${format(date[0].startDate, "dd/MM/yyyy")} to ${format(
-                date[0].endDate,
+              <span onClick={() => setOpendate(!opendate)}>{`${format(
+                dates[0].startDate,
                 "dd/MM/yyyy"
-              )}`}</span>
-              { opendate && 
-              
-              <DateRange
-                onChange={(item) => setDate([item.selection])}
-                ranges={date}
-                rangeColors={["#2B7A78"]}
-                minDate={new Date()}
-              />
-             }
+              )} to ${format(dates[0].endDate, "dd/MM/yyyy")}`}</span>
+              {opendate && (
+                <DateRange
+                  onChange={(item) => setDates([item.selection])}
+                  ranges={dates}
+                  rangeColors={["#2B7A78"]}
+                  minDate={new Date()}
+                />
+              )}
             </div>
             <div className="hsearch-item">
               <label htmlFor="">Options</label>
               <div className="option-item">
-                <span className="option-text">Min Price <small>per night</small></span>
-                <input type="number" className="option-input" />
+                <span className="option-text">
+                  Min Price <small>per night</small>
+                </span>
+                <input
+                  type="number"
+                  onChange={(e) => setMin(e.target.value)}
+                  className="option-input"
+                />
               </div>
               <div className="option-item">
-                <span className="option-text">Max Price <small>per night</small></span>
-                <input type="number" className="option-input" />
+                <span className="option-text">
+                  Max Price <small>per night</small>
+                </span>
+                <input
+                  type="number"
+                  onChange={(e) => setMax(e.target.value)}
+                  className="option-input"
+                />
               </div>
               <div className="option-item">
-                <span className="option-text" >Adult</span>
-                <input type="number" min='1' placeholder={options.adult}className="option-input" />
+                <span className="option-text">Adult</span>
+                <input
+                  type="number"
+                  min="1"
+                  placeholder={options.adult}
+                  className="option-input"
+                />
               </div>
               <div className="option-item">
                 <span className="option-text">Children</span>
-                <input type="number" min="0" className="option-input" placeholder={options.children} />
+                <input
+                  type="number"
+                  min="0"
+                  className="option-input"
+                  placeholder={options.children}
+                />
               </div>
               <div className="option-item">
                 <span className="option-text">Rooms</span>
-                <input type="number" min="1" className="option-input" placeholder={options.room} />
+                <input
+                  type="number"
+                  min="1"
+                  className="option-input"
+                  placeholder={options.room}
+                />
               </div>
             </div>
-            <button>Search</button>
+            <button onClick={handleClick}>Search</button>
           </div>
           <div className="hotels-result">
-            <Hotelresult/>
-            <Hotelresult/>
-            <Hotelresult/>
-            <Hotelresult/>
-            <Hotelresult/>
-            <Hotelresult/>
-            <Hotelresult/>
-            <Hotelresult/>
-            <Hotelresult/>
+            {loading ? (
+              "Loading "
+            ) : (
+              <>
+                {data.map((item) => (
+                  <Hotelresult item={item} key={item._id} />
+                ))}
+              </>
+            )}
           </div>
         </div>
       </div>

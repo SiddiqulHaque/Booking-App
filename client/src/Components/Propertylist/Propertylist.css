@@ -18,6 +18,7 @@
 }
 .plist-titles>h2{
     font-size: 18px;
+    text-transform: capitalize;
 }
 .plist-titles>h3{
     font-size: 15px;
