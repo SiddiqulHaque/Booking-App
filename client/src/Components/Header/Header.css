@@ -1,0 +1,130 @@
+.header{
+    background-color: #2B7A78;
+    color: white;
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+.header-container{
+    width: 100%;
+    max-width: 1100px;
+    margin: 20px 0px 80px 20px;
+}
+.header-container.hotels-mode{
+    margin: 20px 0px 0px 20px;
+}
+.header-list{
+    display: flex;
+    gap: 40px;
+    margin-bottom: 30px;
+}
+.headerlist-items{
+    display: flex;
+    gap: 10px;
+    padding: 10px;
+    cursor: pointer;
+}
+.headerlist-items.active{
+    border: 1px solid white;
+    border-radius: 20px;
+    
+}
+.header-title{
+    font-size: 50px;
+}
+.header-desc{
+    margin: 20px 0px;
+    font-size: 30px;
+}
+.header-button{
+    border: none;
+    cursor: pointer;
+    padding: 12px;
+    border-radius: 5px;
+    background-color: #DEF2F1;
+    color: #2B7A78;
+    font-weight: 700;
+}
+.header-search{
+    height: 30px;
+    background-color: #DEF2F1;
+    display: flex;
+    align-items: center;
+    border: 2px solid #17252A ;
+    justify-content: space-around;
+    width: 100%;
+    max-width: 1100px;
+    padding: 10px 0px;
+    position: absolute;
+    bottom: -25px;
+    border-radius: 5px;
+}
+.header-icon{
+    color: #2B7A78;
+    font-size: 23px;
+}
+.search-button{
+    background-color: #2B7A78;
+    color: #DEF2F1;
+}
+.headersearch-item{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+.header-input{
+    border: 1px solid white;
+    border-radius: 5px;
+    color: black;
+    padding: 10px 50px;
+    outline: none;
+    font-size: 18px;
+}
+
+.header-text{
+    color: black;
+    background-color: white;
+    padding: 10px 50px;
+    border: 1px solid white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.date{
+    position: absolute;
+    top: 50px;
+    z-index: 2;
+}
+.options{
+    position: absolute;
+    top: 50px;
+    border: 1px solid lightgray;
+    background-color: white;
+    border-radius: 4px;
+    color: gray;
+    padding: 10px;
+    z-index: 2;
+    right: 120px;
+}
+.option-items{
+    display: flex;
+    width: 170px;
+    align-items: center;
+    justify-content: space-between;
+    margin: 8px;
+}
+.option-counter{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.option-counter-button{
+    border: 1.5px solid #2B7A78;
+    color: black;
+    border-radius: 3px;
+    padding: 5px 8px;
+    background-color: #DEF2F1;
+    cursor: pointer;
+}
+.option-counter-button:disabled{
+    cursor: not-allowed;
+}

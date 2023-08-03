@@ -1,0 +1,110 @@
+.Hotel-result {
+    border: 1px solid lightgray;
+    padding: 10px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .h-img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+  }
+  
+  .h-desc {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex: 2;
+  }
+  
+  .h-title {
+    font-size: 18px;
+    color: #2B7A78;
+    cursor: pointer;
+  }
+  
+  .h-distance {
+    font-size: 14px;
+  }
+  
+  .h-taxi {
+    font-size: 14px;
+    background-color: #008009;
+    color: white;
+    width: max-content;
+    padding: 3px;
+    border-radius: 5px;
+  }
+  
+  .h-sub{
+    font-size: 14px;
+    font-weight: bold;
+  }
+  
+  .h-features{
+    font-size: 14px;
+  }
+  
+  .h-cancelop{
+    font-size: 14px;
+    color: #008009;
+    font-weight: bold;
+  }
+  
+  .h-cancelopsub{
+    font-size: 14px;
+    color: #008009;
+  }
+  
+  .h-details{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between
+  }
+  
+  .h-rating{
+    display: flex;
+    justify-content: space-between
+  }
+  
+  .h-rating>span{
+    font-weight: 500;
+  }
+  .h-rating>button{
+   background-color: #2B7A78;
+   color: white;
+   padding: 5px;
+   font-weight: bold;
+   border: none;
+  }
+  
+  .h-detaildesc{
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  
+  .h-price{
+    font-size: 26px;
+  }
+  
+  .h-taxop{
+    font-size: 14px;
+    color: gray;
+  }
+  
+  .h-checkbtn{
+    background-color: #def2f1;
+    color: #2B7A78;
+    font-weight: bold;
+    padding: 10px 5px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+  }
